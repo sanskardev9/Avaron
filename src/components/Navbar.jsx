@@ -8,11 +8,16 @@ import { MdOutlinePeopleAlt } from "react-icons/md";
 import { MdPersonOutline } from "react-icons/md";
 import { FaRegFileAlt } from "react-icons/fa";
 
-
-
 export const Navbar = () => {
   const location = useLocation();
   const currentPath = location.pathname;
+
+  const selectedDriver = {
+    name: "Akash Sharma",
+    image: "https://randomuser.me/api/portraits/men/1.jpg",
+    rank: 1,
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light px-4 py-3">
       <div className="container-fluid d-flex flex-column">
@@ -29,7 +34,7 @@ export const Navbar = () => {
             </div>
             <div style={{ color: "white" }}>
               <InputGroup>
-                <Input placeholder="Search" />
+                <Input placeholder="Search individual driver" />
                 <InputGroup.Button>
                   <SearchIcon />
                 </InputGroup.Button>
@@ -42,27 +47,66 @@ export const Navbar = () => {
           className="d-flex flex-row justify-content-between align-items-center mt-5"
           style={{ maxWidth: "1440px", width: "100%", margin: "0 auto" }}
         >
-          <img
-            src={Frame}
-            alt="Fleet"
-            style={{ height: "40px", marginRight: "1rem" }}
-          />
-          <div className="d-flex flex-row gap-3 ">
-              <Link
-                to={"/"}
+          {currentPath === "/" ? (
+            <img
+              src={Frame}
+              alt="Fleet"
+              style={{
+                height: "40px",
+                marginRight: "10px",
+              }}
+            />
+          ) : currentPath === "/drivers" ? (
+            <div
+              className="d-flex rounded me-2"
+              style={{ backgroundColor: "F8F9FA", maxHeight: "60px" }}
+            >
+              <img
+                src={selectedDriver.image}
+                alt={selectedDriver.name}
+                className="rounded-circle"
                 style={{
-                  fontWeight: "500",
-                  textDecoration: "none",
-                  color: currentPath === "/" ? "#3856A6" : "#777777",
+                  width: "56px",
+                  height: "56px",
+                  objectFit: "cover",
+                  marginRight: "12px",
                 }}
-              >
-                {/* <img
-                  src={OverviewImg}
-                  style={{ height: "32px", width: "32px" }}
-                />{" "} */}
-                <MdOutlinePeopleAlt size={32} />
-                Overview
-              </Link>
+              />
+              <div className="d-flex flex-column align-items-start gap-2">
+                <div className="fw-semibold fs-4 fs-sm-3 fs-md-2 fs-lg-1 w-100">
+                  {selectedDriver.name}
+                </div>
+                {selectedDriver.name !== "All Drivers" && (
+                  <div className="d-flex align-items-center fs-4 fs-sm-6 fs-md-4 fs-lg-3 w-100">
+                    Rank:{" "}
+                    <span
+                      className="ms-1"
+                      style={{ color: "#2CA4A4", fontWeight: "bold" }}
+                    >
+                      #{selectedDriver.rank}
+                    </span>
+                  </div>
+                )}
+              </div>
+            </div>
+          ) : (
+            <div className="d-flex flex-column">
+              <div className="fs-4 fs-sm-1">Downloadable Reports</div>
+            </div >
+          )}
+
+          <div className="d-flex flex-row gap-3">
+            <Link
+              to={"/"}
+              style={{
+                fontWeight: "500",
+                textDecoration: "none",
+                color: currentPath === "/" ? "#3856A6" : "#777777",
+              }}
+            >
+              <MdOutlinePeopleAlt size={32} />
+              Overview
+            </Link>
 
             <Link
               to={"/drivers"}
@@ -72,7 +116,6 @@ export const Navbar = () => {
                 color: currentPath === "/drivers" ? "#3856A6" : "#777777",
               }}
             >
-              {/* <img src={PersonImg} style={{ height: "32px", width: "32px" }} />{" "} */}
               <MdPersonOutline size={32} />
               Drivers
             </Link>
@@ -84,7 +127,6 @@ export const Navbar = () => {
                 color: currentPath === "/reports" ? "#3856A6" : "#777777",
               }}
             >
-              {/* <img src={ReportsImg} style={{ height: "32px", width: "32px" }} />{" "} */}
               <FaRegFileAlt size={32} />
               Reports
             </Link>

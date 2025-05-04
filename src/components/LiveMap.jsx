@@ -16,13 +16,13 @@ L.Icon.Default.mergeOptions({
 
 // Example coordinates (update with live data if needed)
 const routeCoordinates = [
-  [28.6304, 77.3739], // Start (Noida Sector 63)
-  [28.6285, 77.3730], // Midpoint
-  [28.6270, 77.3700]  // Destination
+  [28.4112, 77.2941], // Start (Noida Sector 63)
+  [28.4160, 77.3151], // Midpoint
+  [28.4357, 77.3004],  // Destination
 ];
 
 const isMobile = window.innerWidth <= 768;
-const mapHeight = isMobile ? "300px" : "443px";
+const mapHeight = isMobile ? "300px" : "358px";
 
 const LiveMap = () => {
   return (
@@ -31,12 +31,6 @@ const LiveMap = () => {
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <Polyline positions={routeCoordinates} color="blue" />
-      {routeCoordinates.map((position, idx) => (
-        <Marker position={position} key={idx}>
-          <Popup>Point {idx + 1}</Popup>
-        </Marker>
-      ))}
     </MapContainer>
   );
 };

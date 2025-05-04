@@ -1,8 +1,11 @@
 import React from 'react'
+import FleetPerformanceReports from '../components/FleetPerformaceReports'
 
 const Reports = () => {
   return (
-    <div></div>
+    <div>
+      <FleetPerformanceReports/>
+    </div>
   )
 }
 

@@ -1,5 +1,6 @@
 import React from "react";
 import ReactECharts from "echarts-for-react";
+import { icon } from "leaflet";
 
 const AlertSummaryChart = () => {
   const option = {
@@ -9,8 +10,6 @@ const AlertSummaryChart = () => {
       textStyle: {
         fontSize: 24,
         fontWeight: "500",
-
-
       },
     },
     tooltip: {
@@ -27,6 +26,9 @@ const AlertSummaryChart = () => {
         "27 Jan - 2 Feb",
       ],
       top: 30,
+      icon: "circle",
+      itemWidth: 20, 
+      itemHeight: 20,
       left: "right",
     },
     grid: {
@@ -37,7 +39,9 @@ const AlertSummaryChart = () => {
       containLabel: true,
     },
     xAxis: {
+      name: "Events",
       type: "category",
+
       data: [
         "Speed bump",
         "Harsh acceleration",
@@ -67,6 +71,7 @@ const AlertSummaryChart = () => {
     yAxis: {
       type: "value",
       name: "Alerts",
+      splitLine: { show: false },
     },
     series: [
       {

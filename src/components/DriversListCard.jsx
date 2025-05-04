@@ -16,12 +16,12 @@ const getScoreColor = (score) => {
   return '#e53e3e';
 };
 
-const DriverListCard = ({ title, icon, drivers, type = 'ranked', driversLength }) => {
+const DriverListCard = ({ title, iconPath, drivers, type = 'ranked', driversLength }) => {
   return (
     <Panel className="shadow-sm" style={{ borderRadius: '12px', minHeight: '400px', backgroundColor:'#F7F8FA' }}>
       <div className="d-flex justify-content-between align-items-center mb-2">
         <h6 className=" mb-0" style={{ fontSize: '1rem'}}>{title}</h6>
-        {icon}
+        <img src={iconPath} />
       </div>
       <h2 style={{fontSize:'48px',color:'#3856A6'}} className="mb-2 mt-2">{driversLength}</h2>
 

@@ -158,7 +158,7 @@ const DriverCardsGrid = () => (
             <div className="w-100">
               <DriverListCard
                 title="Total Fleet Drivers"
-                icon={<FaTrophy />}
+                iconPath="/Vector (8).svg"
                 drivers={driverList}
                 type="basic"
                 driversLength={driverList.length}
@@ -178,7 +178,7 @@ const DriverCardsGrid = () => (
         <div className="col-md-6 mb-4">
           <DriverListCard
             title="Top Performing Drivers"
-            icon={<FaTrophy />}
+            iconPath="/emoji_events.svg"
             drivers={topDrivers}
             type="ranked"
           />
@@ -186,7 +186,7 @@ const DriverCardsGrid = () => (
         <div className="col-md-6 mb-4">
           <DriverListCard
             title="Least Performing Drivers"
-            icon={<FaExclamation />}
+            iconPath="/exclamation.svg"
             drivers={leastDrivers}
             type="ranked"
           />
