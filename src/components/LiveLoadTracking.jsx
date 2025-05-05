@@ -23,6 +23,7 @@ const getBarColor = (percentage) => {
 };
 
 const LiveLoadChart = () => {
+
   const [sortOrder, setSortOrder] = useState("underload");
 
   const sortedData = (() => {
@@ -65,7 +66,6 @@ const LiveLoadChart = () => {
           itemStyle: { color: "#3856A6" },
           itemStyle: {
             color: "#3856A6",
-            borderRadius: [10, 10, 0, 0], // top-left, top-right, bottom-right, bottom-left
           },
         },
         axisLine: {
@@ -99,7 +99,6 @@ const LiveLoadChart = () => {
   const totalActive = 12;
   const totalAvailable = 16;
   const totalLoad = 350;
-  const totalCapacity = 460; // made-up from data
 
   return (
     <div className="mt-5 p-4" style={{ backgroundColor: "white" }}>

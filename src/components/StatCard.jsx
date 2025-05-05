@@ -13,8 +13,6 @@ const StatCard = ({ title, value, unit, icon, chart, percentage, note }) => {
           {icon && <img src={icon} alt="icon" />}
         </div>
       </h6>
-
-      {chart ? (
         <div className="d-flex flex-row justify-content-between mt-2">
           <div>
             <h2 style={{ color: "#3856A6" }}>{value}</h2>
@@ -30,12 +28,6 @@ const StatCard = ({ title, value, unit, icon, chart, percentage, note }) => {
             <p className="mt-2 text-muted">{note}</p>
           </div>
         </div>
-      ) : (
-        <>
-          <h3 className="text-primary">{value}</h3>
-          {percentage && <p className="text-success">{percentage}</p>}
-        </>
-      )}
     </Card>
   );
 };

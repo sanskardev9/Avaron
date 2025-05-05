@@ -1,36 +1,39 @@
-import React from 'react';
-import { MapContainer, TileLayer, Marker, Polyline, Popup } from 'react-leaflet';
-import L from 'leaflet';
+import React, { useEffect } from "react";
+import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
 
-import iconUrl from 'leaflet/dist/images/marker-icon.png';
-import iconRetinaUrl from 'leaflet/dist/images/marker-icon-2x.png';
-import shadowUrl from 'leaflet/dist/images/marker-shadow.png';
+const RecenterMap = ({ coordinates }) => {
+  const map = useMap();
 
-// Fix for default marker icon
-delete L.Icon.Default.prototype._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl,
-  iconUrl,
-  shadowUrl,
-});
+  useEffect(() => {
+    if (coordinates) {
+      map.setView([coordinates.lat, coordinates.lng], 13, {
+        animate: true,
+      });
+    }
+  }, [coordinates]);
 
-// Example coordinates (update with live data if needed)
-const routeCoordinates = [
-  [28.4112, 77.2941], // Start (Noida Sector 63)
-  [28.4160, 77.3151], // Midpoint
-  [28.4357, 77.3004],  // Destination
-];
+  return null;
+};
 
-const isMobile = window.innerWidth <= 768;
-const mapHeight = isMobile ? "300px" : "358px";
+const LiveMap = ({ coordinates }) => {
+  const defaultCoordinates = { lat: 22.9734, lng: 78.6569 };
+  const center = coordinates?.lat ? coordinates : defaultCoordinates;
 
-const LiveMap = () => {
   return (
-    <MapContainer center={routeCoordinates[0]} zoom={16} style={{ height: mapHeight, width: "100%", borderRadius: '12px'}}>
-      <TileLayer
-        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
+    <MapContainer
+      center={[coordinates.lat, coordinates.lng]}
+      zoom={16}
+      scrollWheelZoom={false}
+      style={{ height: "300px", width: "100%" }}
+    >
+      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+      <Marker position={[coordinates.lat, coordinates.lng]}>
+        <Popup>
+          Current Location <br /> Lat: {coordinates.lat}, Lng: {coordinates.lng}
+        </Popup>
+      </Marker>
+      <RecenterMap coordinates={coordinates} />
     </MapContainer>
   );
 };

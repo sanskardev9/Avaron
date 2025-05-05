@@ -1,31 +1,73 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import VehicleCard from "../components/VehicleCard";
 import LiveMap from "../components/LiveMap";
 
 const LiveMapView = () => {
+
   const vehicleData = [
-    { vehicleNumber: "DL 9SG4 6106", driverName: "Aakash Sharma" },
-    { vehicleNumber: "DL 9SG4 6106", driverName: "Aakash Sharma" },
-    { vehicleNumber: "DL 9SG4 6106", driverName: "Aakash Sharma" },
-    { vehicleNumber: "DL 9SG4 6106", driverName: "Aakash Sharma" },
-    { vehicleNumber: "DL 9SG4 6106", driverName: "Aakash Sharma" },
-    { vehicleNumber: "DL 9SG4 6106", driverName: "Aakash Sharma" },
-    { vehicleNumber: "DL 9SG4 6106", driverName: "Aakash Sharma" },
-    { vehicleNumber: "DL 9SG4 6106", driverName: "Aakash Sharma" },
+    {
+      vehicleNumber: "DL 9SG4 6106",
+      driverName: "Aakash Sharma",
+      coordinates: { lat: 28.6139, lng: 77.209 }, // Delhi
+    },
+    {
+      vehicleNumber: "HR 26DA 2330",
+      driverName: "Ravi Mehta",
+      coordinates: { lat: 28.4595, lng: 77.0266 }, // Gurugram
+    },
+    {
+      vehicleNumber: "UP 16BC 5123",
+      driverName: "Sunil Kumar",
+      coordinates: { lat: 28.4089, lng: 77.3178 }, // Noida
+    },
+    {
+      vehicleNumber: "RJ 14AB 7745",
+      driverName: "Mohit Verma",
+      coordinates: { lat: 26.9124, lng: 75.7873 }, // Jaipur
+    },
+    {
+      vehicleNumber: "PB 10CD 9988",
+      driverName: "Harpreet Singh",
+      coordinates: { lat: 30.7333, lng: 76.7794 }, // Chandigarh
+    },
+    {
+      vehicleNumber: "UK 07EF 5566",
+      driverName: "Vikas Rawat",
+      coordinates: { lat: 30.3165, lng: 78.0322 }, // Dehradun
+    },
+    {
+      vehicleNumber: "HP 12GH 3344",
+      driverName: "Rohit Thakur",
+      coordinates: { lat: 31.1048, lng: 77.1734 }, // Shimla
+    },
+    {
+      vehicleNumber: "DL 3CJK 1234",
+      driverName: "Nitin Kapoor",
+      coordinates: { lat: 28.7041, lng: 77.1025 }, // New Delhi
+    },
   ];
+  
+  const [selectedVehicle, setSelectedVehicle] = useState(vehicleData[0]);
+
+ 
 
   return (
-    <Container fluid className="mt-4 ">
+    <Container fluid className="mt-4 mb-4">
       <Row>
-        <Col md={4} style={{ maxHeight: "72vh", overflowY: "auto" }}>
+        <Col md={4} style={{ maxHeight: "72vh", overflowY: "auto" }} className="mb-1">
           {vehicleData.map((v, i) => (
-            <VehicleCard
+            <div
               key={i}
-              vehicleNumber={v.vehicleNumber}
-              driverName={v.driverName}
-              isActive={i === 0}
-            />
+              onClick={() => setSelectedVehicle(v)}
+              style={{ cursor: "pointer" }}
+            >
+              <VehicleCard
+                vehicleNumber={v.vehicleNumber}
+                driverName={v.driverName}
+                isActive={v.vehicleNumber === selectedVehicle.vehicleNumber}
+              />
+            </div>
           ))}
         </Col>
 
@@ -65,7 +107,8 @@ const LiveMapView = () => {
               </div>
             </div>
             <div className="mt-3">
-              <LiveMap />
+              <LiveMap coordinates={selectedVehicle.coordinates} />
+
             </div>
           </Card>
 
@@ -111,11 +154,11 @@ const LiveMapView = () => {
                         4000{" "}
                       </div>
                       <div
-                          className="text-muted fw-normal"
-                          style={{ fontSize: "14px" }}
-                        >
-                          kg
-                        </div>
+                        className="text-muted fw-normal"
+                        style={{ fontSize: "14px" }}
+                      >
+                        kg
+                      </div>
                     </div>
                   </div>
                   <div className="">

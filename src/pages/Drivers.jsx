@@ -9,18 +9,17 @@ import RecentTripsAndChallan from "../components/RecentTripsAndChallan";
 import DriverProgressChart from "../components/DriverProgressChart";
 
 const Drivers = () => {
-  const [selectedDriver, setSelectedDriver] = useState("all");
+  const [selectedDriver, setSelectedDriver] = useState("Akash Sharma");
   const navigate = useNavigate();
   const location = useLocation();
 
   const driverList = [
-    { label: "All Drivers", value: "all" },
+    // { label: "All Drivers", value: "all" },
     { label: "Mohan Roy", value: "Mohan Roy" },
     { label: "Akash Sharma", value: "Akash Sharma" },
     { label: "Didar Ahmad", value: "Didar Ahmad" },
   ];
 
-  // Load selected driver from URL query params
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const driver = params.get("driver");
@@ -174,6 +173,26 @@ const Drivers = () => {
     ],
   };
 
+  const vehicleData = [
+    {
+      driverName: "Akash Sharma",
+      coordinates: { lat: 28.6139, lng: 77.209 }, // Delhi
+    },
+    {
+      driverName: "Mohan Roy",
+      coordinates: { lat: 28.4595, lng: 77.0266 }, // Gurugram
+    },
+    {
+      driverName: "Didar Ahmad",
+      coordinates: { lat: 26.9124, lng: 75.7873 }, // Jaipur
+    },
+  ];
+
+  const currentDriver = vehicleData.find(
+    (driver) => driver.driverName === selectedDriver
+  );
+  const coordinates = currentDriver?.coordinates; 
+
   return (
     <Container className="p-4" style={{ maxWidth: "1440px" }}>
       <div className="d-flex justify-content-end mt-4 ">
@@ -204,9 +223,9 @@ const Drivers = () => {
       >
         <AlertSummaryChart />
       </div>
-        <OngoingTrip />
-      <RecentTripsAndChallan/>
-      <DriverProgressChart/>
+      <OngoingTrip coordinates={coordinates}/>
+      <RecentTripsAndChallan />
+      <DriverProgressChart />
     </Container>
   );
 };

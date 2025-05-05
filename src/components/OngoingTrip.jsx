@@ -2,12 +2,10 @@ import React from "react";
 import LiveMap from "./LiveMap";
 import { Container, Row, Col } from "react-bootstrap";
 
-const OngoingTrip = () => {
+const OngoingTrip = ({coordinates}) => {
   return (
     <Container fluid className="p-4 bg-white rounded shadow-sm">
-      {/* Flex container for Info + Map */}
       <div className="d-flex flex-column flex-md-row gap-3">
-        {/* Left Panel: Header + Pickup/Drop */}
         <div
           className=" d-flex flex-column justify-content-between p-3 bg-white rounded"
           style={{ minHeight: "400px" }}
@@ -16,7 +14,6 @@ const OngoingTrip = () => {
             <h5 className="fw-semibold">Ongoing Trip Payback</h5>
             <div className="text-danger fw-semibold mt-4 mb-4">🔴 LIVE</div>
 
-            {/* Pickup */}
             <div className="mb-4">
               <div className="fw-semibold mb-2"><img src="/distance.svg" /> Pickup</div>
               <p className="mb-1 small text-muted">
@@ -27,7 +24,6 @@ const OngoingTrip = () => {
               <p className="small text-secondary">12:56 | 6 Feb 2025</p>
             </div>
 
-            {/* Drop */}
             <div>
               <div className="fw-semibold mb-2"><img src="/distance (1).svg" />  Drop</div>
               <p className="mb-1 small text-muted">
@@ -40,16 +36,14 @@ const OngoingTrip = () => {
           </div>
         </div>
 
-        {/* Right Panel: Map (Wider than left) */}
         <div
           className="d-flex align-items-center bg-white rounded p-2"
           style={{ minHeight: "400px", flex: "2" }}
         >
-          <LiveMap />
+          {coordinates && <LiveMap coordinates={coordinates}/>}
         </div>
       </div>
 
-      {/* Stats */}
       <Row className="text-center mt-4 mb-2">
         <Col md={4}>
           <div className="d-flex flex-column justify-content-center align-items-center">
@@ -112,7 +106,6 @@ const OngoingTrip = () => {
         </Col>
       </Row>
 
-      {/* Event Stats */}
       <div className="bg-light rounded mt-4 p-3">
         <Row className="text-center">
           {[
