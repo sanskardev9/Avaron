@@ -191,7 +191,6 @@ const Drivers = () => {
           placeholder="Select an individual driver"
         />
       </div>
-      {/* <div className="container"> */}
 
       <Fleet data={statData[selectedDriver] || []} />
 

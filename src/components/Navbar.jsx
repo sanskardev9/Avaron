@@ -73,7 +73,7 @@ export const Navbar = () => {
                 }}
               />
               <div className="d-flex flex-column align-items-start gap-2">
-                <div className="fw-semibold fs-4 fs-sm-3 fs-md-2 fs-lg-1 w-100">
+                <div className="fw-semibold fs-4 fs-sm-5 fs-md-2 fs-lg-1 w-100">
                   {selectedDriver.name}
                 </div>
                 {selectedDriver.name !== "All Drivers" && (
@@ -89,10 +89,14 @@ export const Navbar = () => {
                 )}
               </div>
             </div>
-          ) : (
+          ) : currentPath === "/reports" ? (
             <div className="d-flex flex-column">
               <div className="fs-4 fs-sm-1">Downloadable Reports</div>
-            </div >
+            </div>
+          ) : (
+            <div>
+              <Link to={"/"} ><img src="/angleBracket.png" style={{width:'32px', height:'32px', marginRight:'80px'}}  /> </Link>
+            </div>
           )}
 
           <div className="d-flex flex-row gap-3">

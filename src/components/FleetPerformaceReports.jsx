@@ -19,7 +19,7 @@ const FleetPerformanceReports = () => {
   ];
 
   return (
-    <div className="p-4" style={{marginBottom:'90px'}}>
+    <div className="p-4" style={{marginBottom:'92px'}}>
       <p className="fs-6 fs-sm-3">
         Reports will be downloaded for the timeline selected. To download
         reports for a specific timeline, edit the timeline from the menu.

@@ -70,7 +70,7 @@ const LiveMapView = () => {
           </Card>
 
           <Card
-            className="p-4 border-0 shadow-sm mb-3"
+            className="p-4 border-0 shadow-sm mb-4"
             style={{ borderRadius: "16px" }}
           >
             <h5
