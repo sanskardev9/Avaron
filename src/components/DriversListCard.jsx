@@ -31,7 +31,7 @@ const DriverListCard = ({ title, iconPath, drivers, type = 'ranked', driversLeng
       </div>
 
       <div style={{ maxHeight: 280, overflowY: 'auto' }}>
-        <List hover bordered style={{ borderRadius: '10px' }}>
+        <List hover style={{ borderRadius: '10px' }}>
           {drivers.map((driver, index) => (
             <List.Item
               key={index}

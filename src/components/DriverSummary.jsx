@@ -1,7 +1,6 @@
 import React from "react";
 import DriverListCard from "./DriversListCard";
 import DriverRatingSummary from "./DriverRatingSummary";
-import { FaTrophy, FaExclamation, FaUser } from "react-icons/fa";
 
 const driverList = [
   {

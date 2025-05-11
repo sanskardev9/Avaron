@@ -1,9 +1,7 @@
 import React from "react"
 import GaugeChart from "./GaugeChart"
 import StatCard from "./StatCard"
-import { Container, Row, Col, Card } from "react-bootstrap";
-
-
+import { Row, Col } from "react-bootstrap";
 
 const Fleet = ({data}) => {
     
@@ -11,7 +9,7 @@ const Fleet = ({data}) => {
         <div>
           <Row className="g-3">
             <Col md={3}>
-              <GaugeChart value={90} />
+              <GaugeChart value={100} />
             </Col>
     
             <Col md={9}>

@@ -1,7 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactECharts from "echarts-for-react";
 import { Row, Col, Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+
+const useIsSmallScreen = (breakpoint = 768) => {
+  const [isSmall, setIsSmall] = useState(window.innerWidth < breakpoint);
+
+  useEffect(() => {
+    const handleResize = () => setIsSmall(window.innerWidth < breakpoint);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [breakpoint]);
+
+  return isSmall;
+};
 
 const vehicleLoadData = [
   { vehicle: "UP TSRE 2244", load: 1100, capacity: 1000 },
@@ -23,8 +35,9 @@ const getBarColor = (percentage) => {
 };
 
 const LiveLoadChart = () => {
-
+  const isSmallScreen = useIsSmallScreen();
   const [sortOrder, setSortOrder] = useState("underload");
+  const [value, setValue] = useState(76);
 
   const sortedData = (() => {
     const underload = [],
@@ -52,6 +65,7 @@ const LiveLoadChart = () => {
   });
 
   const gaugeOption = {
+ 
     series: [
       {
         type: "gauge",
@@ -64,9 +78,6 @@ const LiveLoadChart = () => {
           roundCap: true,
           clip: false,
           itemStyle: { color: "#3856A6" },
-          itemStyle: {
-            color: "#3856A6",
-          },
         },
         axisLine: {
           lineStyle: {
@@ -79,7 +90,7 @@ const LiveLoadChart = () => {
         axisTick: { show: false },
         splitLine: { show: false },
         axisLabel: { show: false },
-        data: [{ value: 76 }],
+        data: [{ value: value }],
         title: {
           fontSize: 14,
           offsetCenter: ["0%", "80%"],
@@ -99,6 +110,39 @@ const LiveLoadChart = () => {
   const totalActive = 12;
   const totalAvailable = 16;
   const totalLoad = 350;
+
+  const getDataZoom = (isSmallScreen, dataLength) => {
+    if (!isSmallScreen && dataLength > 10) {
+      return [
+        {
+          type: "slider",
+          xAxisIndex: 0,
+          start: 0,
+          end: (10 / dataLength) * 100, // show only 10 bars
+        },
+      ];
+    }
+  
+    if (isSmallScreen && dataLength > 3) {
+      return [
+        {
+          type: "slider",
+          xAxisIndex: 0,
+          start: 0,
+          end: (3 / dataLength) * 100, // show only 3 bars
+        },
+        {
+          type: "inside",
+          xAxisIndex: 0,
+          start: 0,
+          end: (3 / dataLength) * 100,
+        },
+      ];
+    }
+  
+    return []; // No zoom if within limits
+  };
+  
 
   return (
     <div className="mt-5 p-4" style={{ backgroundColor: "white" }}>
@@ -192,7 +236,7 @@ const LiveLoadChart = () => {
                     <h2 style={{ fontSize: "48px", color: "#3856A6" }}>
                       {totalLoad}
                     </h2>
-                    <span className="text-muted">tons</span>
+                    <span className="text-muted">kgs</span>
                   </div>
                 </div>
 
@@ -214,7 +258,7 @@ const LiveLoadChart = () => {
                         color: "#3856A6",
                       }}
                     >
-                      76%
+                      {value}%
                     </h2>
                     <p
                       style={{
@@ -235,7 +279,7 @@ const LiveLoadChart = () => {
               >
                 Total load capacity of{" "}
                 <span style={{ color: "#61BB46", fontWeight: "400" }}>
-                  {totalActive} (tons)
+                  {totalActive} (kgs)
                 </span>
               </p>
             </Row>
@@ -304,6 +348,7 @@ const LiveLoadChart = () => {
             name: "Percentage \n acquired",
             max: 140,
           },
+          dataZoom: getDataZoom(isSmallScreen, chartData.length),
           series: [
             {
               name: "Load % Achieved",

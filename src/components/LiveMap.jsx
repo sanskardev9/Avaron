@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, useMap, Polyline} from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 
 const RecenterMap = ({ coordinates }) => {
@@ -19,11 +19,17 @@ const RecenterMap = ({ coordinates }) => {
 const LiveMap = ({ coordinates }) => {
   const defaultCoordinates = { lat: 22.9734, lng: 78.6569 };
   const center = coordinates?.lat ? coordinates : defaultCoordinates;
+  
+  const routePath = [
+    [22.9734, 78.6569], // Starting point
+    [22.9834, 78.6669], // Middle point
+    [22.9934, 78.6769], // End point
+  ];
 
   return (
     <MapContainer
       center={[coordinates.lat, coordinates.lng]}
-      zoom={16}
+      zoom={13}
       scrollWheelZoom={false}
       style={{ height: "300px", width: "100%" }}
     >

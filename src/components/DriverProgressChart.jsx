@@ -9,6 +9,9 @@ const DriverProgressChart = () => {
 
   const scores = [80, 90, 70, 80, 70, 85, 95, 70, 85, 70, 75, 88];
 
+  const minScore = Math.min(...scores);
+  const dynamicMin = minScore < 10 ? 0 : minScore-10;  
+
   const option = {
     tooltip: {
       trigger: 'axis'
@@ -26,7 +29,7 @@ const DriverProgressChart = () => {
     yAxis: {
       type: 'value',
       name: 'Score',
-      min: 0,
+      min: dynamicMin,
       max: 110,
       interval: 10,
       nameTextStyle: { align: 'center' },
@@ -67,7 +70,7 @@ const DriverProgressChart = () => {
   
 
   return (
-    <Card className="p-4 shadow-sm bg-white rounded ">
+    <Card className="p-4 shadow-sm bg-white rounded mb-5">
       <h3 className=" mb-4" style={{fontWeight:'500'}}>Driver Progress</h3>
       <ReactECharts option={option} style={{ height: "550px", width: "100%" }} />
     </Card>
